@@ -15,5 +15,6 @@ export default {
   .player {
     border: 1px solid rgb(219, 219, 219);
     border-radius: 20px;
+    font-family: 'Montserrat', sans-serif;
   }
 </style>
