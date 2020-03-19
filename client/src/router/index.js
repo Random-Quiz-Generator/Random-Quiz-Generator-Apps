@@ -24,4 +24,12 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if (to.name === 'Lobby' && !localStorage.getItem('name')) {
+    next({ path: '/' })
+  } else {
+    next()
+  }
+})
+
 export default router
