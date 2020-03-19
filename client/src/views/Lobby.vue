@@ -15,6 +15,7 @@
               <small class="ml-1">. . .</small>
              </div>
             <button @click.prevent="countdown" class="btn btn-danger start-now" v-if="!isPlaying">START</button>
+            <button @click.prevent="goback" class="btn btn-warning mt-2 start-now">Back to home</button>
             <small class="ml-1" v-if="isPlaying">Game is on progres..</small>
            </div>
           </b-col>
@@ -27,6 +28,7 @@
 <script>
 // @ is an alias to /src
 import Player from '../components/Player'
+import io from 'socket.io-client'
 export default {
   name: 'Home',
   components: {
@@ -34,15 +36,11 @@ export default {
   },
   data () {
     return {
-      players: [
-        'Adam',
-        'Ridza',
-        'Haidar',
-        'Yoko'
-      ],
+      players: [],
       isPlaying: false,
       counter: 3,
-      showCounter: false
+      showCounter: false,
+      socket: {}
     }
   },
   methods: {
@@ -61,7 +59,23 @@ export default {
     },
     startGame () {
       console.log('start')
+    },
+    goback () {
+      this.$router.push({ path: '/' })
     }
+  },
+  created: function () {
+    this.socket = io('http://localhost:3000')
+    const playerName = localStorage.getItem('name')
+    this.socket.on('connect', () => {
+      this.socket.emit('joined', playerName)
+    })
+    this.socket.on('updatePlayer', (playerNames) => {
+      this.players = playerNames
+    })
+  },
+  destroyed: function () {
+    this.socket.emit('leave')
   }
 }
 </script>

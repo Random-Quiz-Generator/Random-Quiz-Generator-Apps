@@ -4,8 +4,23 @@ const server = http.createServer(app)
 const io = require('socket.io')(server)
 const fs = require('fs')
 const port = 3000
-
+const players = []
 const questions = JSON.parse(fs.readFileSync('questions.json', 'utf-8'))
+
+io.on('connection', socket => {
+  socket.on('joined', (playerName) => {
+    socket.player = players.length
+    players.push(playerName)
+    io.emit('updatePlayer', players)
+
+    socket.on('leave', () => {
+      socket.disconnect()
+    })
+  })
+  socket.on('disconnect', function () {
+    players.splice(socket.player, 1)
+    io.emit('updatePlayer', players)
+  })
 
 //nanti dipanggil ke function socket yang get question
 function getQuestion () {
@@ -18,10 +33,6 @@ function getQuestion () {
     return null
   }
 }
-
-io.on('connection', socket => {
-  console.log('user connected')
-})
 
 server.listen(port, _ => {
   console.log(`Working on port ${port}`);
