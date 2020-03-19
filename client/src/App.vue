@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <audio src="./assets/Warped.ogg" loop autoplay preload="auto"/>
     <router-view/>
   </div>
 </template>
