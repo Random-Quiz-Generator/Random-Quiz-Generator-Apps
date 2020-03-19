@@ -4,12 +4,21 @@
         <h1 class="display-3 mt-3">Welcome!</h1>
         <small>Click start when everyone ready!</small>
         <b-row class="lobby m-3">
-          <b-col cols="4 players-container p-2">
+          <b-col cols="4 players-container p-2 d-flex flex-column">
            <h1 class="display-6 mt-3 player-title">Player joined: </h1>
            <small>Minimum player: 2</small>
            <player v-for="(player, i) in players" :key="i" :name="players[i]"></player>
+           <div class="start-btn mb-4 mr-3 ml-3">
+             <div class="d-flex" v-if="showCounter">
+              <small>starting in</small>
+              <small class="ml-1">{{counter}}</small>
+              <small class="ml-1">. . .</small>
+             </div>
+            <button @click.prevent="countdown" class="btn btn-danger start-now" v-if="!isPlaying">START</button>
+            <small class="ml-1" v-if="isPlaying">Game is on progres..</small>
+           </div>
           </b-col>
-          <b-col cols="8 how-to p-2">howto</b-col>
+          <b-col cols="8 how-to p-2"></b-col>
         </b-row>
       </b-container>
     </div>
@@ -30,7 +39,28 @@ export default {
         'Ridza',
         'Haidar',
         'Yoko'
-      ]
+      ],
+      isPlaying: false,
+      counter: 3,
+      showCounter: false
+    }
+  },
+  methods: {
+    countdown () {
+      this.showCounter = true
+      const timer = setInterval(() => {
+        if (this.counter === 1) {
+          clearInterval(timer)
+          this.showCounter = false
+          this.isPlaying = true
+          this.startGame()
+        } else {
+          this.counter--
+        }
+      }, 1000)
+    },
+    startGame () {
+      console.log('start')
     }
   }
 }
@@ -59,5 +89,11 @@ export default {
   .player-title {
     font-size: 30px;
     font-weight: bold;
+  }
+  .start-btn{
+    margin-top: auto;
+  }
+  .start-now{
+    width: 100%;
   }
 </style>
