@@ -23,6 +23,7 @@
         </b-row>
       </b-container>
     <cannot-join v-if="isPlaying" @click.prevent="goback"></cannot-join>
+    <post-game v-if="isFinished" :result="result"></post-game>
     </div>
 </template>
 
@@ -31,19 +32,23 @@
 import Player from '../components/Player'
 import io from 'socket.io-client'
 import CannotJoin from '../components/CannotJoin'
+import PostGame from '../components/PostGame'
 export default {
   name: 'Home',
   components: {
     Player,
-    CannotJoin
+    CannotJoin,
+    PostGame
   },
   data () {
     return {
       players: [],
-      isPlaying: true,
+      isPlaying: false,
       counter: 3,
       showCounter: false,
-      socket: {}
+      socket: {},
+      isFinished: false,
+      result: false // win: true, lose: false
     }
   },
   methods: {
