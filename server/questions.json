@@ -52,7 +52,7 @@
             "c": "Lieutenant",
             "d": "Incorrectly"
         },
-        "Answer": "d"
+        "answer": "d"
     },
     {
         "id": 6,
@@ -63,7 +63,7 @@
             "c": "None",
             "d": "five"
         },
-        "Answer": "c"
+        "answer": "c"
     },
     {
         "id": 7,
@@ -74,7 +74,7 @@
             "c": "0",
             "d": "3"
         },
-        "Answer": "a"
+        "answer": "a"
     },
     {
         "id": 8,
@@ -85,7 +85,7 @@
             "c": "Mary",
             "d": "Anna"
         },
-        "Answer": "c"
+        "answer": "c"
     },
     {
         "id": 9,
@@ -96,7 +96,7 @@
             "c": "0.10$",
             "d": "0.15$"
         },
-        "Answer": "a"
+        "answer": "a"
     },
     {
         "id": 10,
@@ -107,7 +107,7 @@
             "c": "C",
             "d": "F"
         },
-        "Answer": "b"
+        "answer": "b"
     },
     {
         "id": 11,
@@ -118,7 +118,7 @@
             "c": "11",
             "d": "12"
         },
-        "Answer": "a"
+        "answer": "a"
     },
     {
         "id": 12,
@@ -129,7 +129,7 @@
             "c": "2",
             "d": "1"
         },
-        "Answer": "d"
+        "answer": "d"
     },
     {
         "id": 13,
@@ -140,7 +140,7 @@
             "c": "Z",
             "d": "S"
         },
-        "Answer": "a"
+        "answer": "a"
     },
     {
         "id": 14,
@@ -151,7 +151,7 @@
             "c": "12",
             "d": "15"
         },
-        "Answer": "c"
+        "answer": "c"
     },
     {
         "id": 15,
@@ -162,7 +162,7 @@
             "c": "30",
             "d": "15"
         },
-        "Answer": "a"
+        "answer": "a"
     },
     {
         "id": 16,
@@ -173,7 +173,7 @@
             "c": "9",
             "d": "10"
         },
-        "Answer": "b"
+        "answer": "b"
     },
     {
         "id": 17,
@@ -184,7 +184,7 @@
             "c": "10",
             "d": "5"
         },
-        "Answer": "d"
+        "answer": "d"
     },
     {
         "id": 18,
@@ -195,7 +195,7 @@
             "c": "30 km/h",
             "d": "120 km/h"
         },
-        "Answer": "b"
+        "answer": "b"
     },
     {
         "id": 19,
@@ -206,7 +206,7 @@
             "c": "3",
             "d": "4"
         },
-        "Answer": "a"
+        "answer": "a"
     },
     {
         "id": 20,
@@ -217,7 +217,7 @@
             "c": "10",
             "d": "8"
         },
-        "Answer": "b"
+        "answer": "b"
     },
     {
         "id": 21,
@@ -228,6 +228,7 @@
             "c": "it'll be a timeful over there",
             "d": "they'll walked in normally"
         },
+<<<<<<< HEAD:Server/questions.json
         "Answer": "a"
     },
     {
@@ -348,4 +349,8 @@
 
 
     
+=======
+        "answer": ""
+    }
+>>>>>>> 569f92c1aee9c29ccfdf6205fd70d36dc2e323fd:server/questions.json
 ]
