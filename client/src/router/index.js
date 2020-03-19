@@ -15,7 +15,7 @@ const routes = [
     path: '/lobby',
     name: 'Lobby',
     component: Lobby
-  },
+  }
 ]
 
 const router = new VueRouter({

@@ -4,13 +4,12 @@
       <h1 class="display-3 mt-5 pt-5">Welcome to</h1>
       <h1 class="display-3 bounce infinite animated">Random Quiz</h1>
       <small>Some are funny. Some are mindblowing.</small>
-      <b-form class="pt-5 d-flex flex-column align-items-start">
+      <b-form class="pt-5 mt-4 d-flex flex-column align-items-start">
         <b-form-group>
           <b-form-input
             v-model= "name"
             type="text"
             required
-            placeholder="Enter your name"
             class="form-input"
           ></b-form-input>
       </b-form-group>
