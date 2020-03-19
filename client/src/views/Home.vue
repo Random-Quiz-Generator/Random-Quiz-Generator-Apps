@@ -62,4 +62,7 @@ export default {
     background-color: rgb(8, 77, 25) !important;
     border: 0 !important;
   }
+  h1{
+    font-family: 'Montserrat', sans-serif;
+  }
 </style>

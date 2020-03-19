@@ -25,4 +25,12 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+small {
+  font-family: 'Bellota Text', cursive;
+}
+
+button {
+  font-family: 'Bellota Text', cursive !important;
+}
 </style>
