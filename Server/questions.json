@@ -221,15 +221,127 @@
     },
     {
         "id": 21,
-        "question": "" ,
+        "question": "what happens when past, present, and future walks into a bar?" ,
         "options": {
-            "a": "",
-            "b": "",
-            "c": "",
-            "d": ""
+            "a": "it'll be pretty tense",
+            "b": "they'll pull out a black hole",
+            "c": "it'll be a timeful over there",
+            "d": "they'll walked in normally"
         },
-        "Answer": ""
+        "Answer": "a"
+    },
+    {
+        "id": 22,
+        "question": "2 goldfish in a tank, one turns to another and said?" ,
+        "options": {
+            "a": "fire in the hole",
+            "b": "blububublubblub",
+            "c": "splash",
+            "d": "so..how do we drive this thing?"
+        },
+        "Answer": "d"
+    },
+    {
+        "id": 22,
+        "question": "2 soldiers in a tank, one turns to another and said?" ,
+        "options": {
+            "a": "fire in the hole",
+            "b": "blububublubblub",
+            "c": "splash",
+            "d": "so..how do we drive this thing?"
+        },
+        "Answer": "b"
+    },
+    {
+        "id": 23,
+        "question": "How many mexicans would you need to change a lightbulb?" ,
+        "options": {
+            "a": "unos",
+            "b": "one",
+            "c": "juan",
+            "d": "satu"
+        },
+        "Answer": "c"
+    },
+    {
+        "id": 24,
+        "question": "How do you make a Holy Water?" ,
+        "options": {
+            "a": "By praying to it",
+            "b": "Put it into a bottle labeled Holy Water",
+            "c": "Using a Magic Stone",
+            "d": "Boil The Hell out of it"
+        },
+        "Answer": "d"
+    },
+    {
+        "id": 25,
+        "question": "Why is it hard to teach puns to kleptomaniacs?" ,
+        "options": {
+            "a": "Because they're stupid",
+            "b": "Because they don't want to",
+            "c": "Because they takes things literally",
+            "d": "Because it's not their taste"
+        },
+        "Answer": "d"
+    },
+    {
+        "id": 26,
+        "question": "What do you called a soldier that survives a war that includes the usage of mustard gas?" ,
+        "options": {
+            "a": "A Seasoned Veteran",
+            "b": "A Warlord",
+            "c": "A Hero",
+            "d": "A Soldier"
+        },
+        "Answer": "a"
+    },
+    {
+        "id": 27,
+        "question": "What is Atheism?" ,
+        "options": {
+            "a": "A Religion",
+            "b": "A Term",
+            "c": "A Non-Prophet organisation",
+            "d": "A Word"
+        },
+        "Answer": "c"
+    },
+    {
+        "id": 28,
+        "question": "What is the term for securities in Samsung Store?" ,
+        "options": {
+            "a": "Security",
+            "b": "The Guardians of the galaxy",
+            "c": "Samsung Genious",
+            "d": "A Seller"
+        },
+        "Answer": "b"
+    },
+    {
+        "id": 29,
+        "question": "what kind of puns is the worst?" ,
+        "options": {
+            "a": "Cheese",
+            "b": "Sausage",
+            "c": "Milk",
+            "d": "Flour"
+        },
+        "Answer": "b"
+    },
+    {
+        "id": 30,
+        "question": "Why do people need to learn sign language?" ,
+        "options": {
+            "a": "Because it'll be handy in the future",
+            "b": "Because it's cool",
+            "c": "Because it's all right",
+            "d": "Because it's counted as skills"
+        },
+        "Answer": "a"
     }
+
+
 
     
     
