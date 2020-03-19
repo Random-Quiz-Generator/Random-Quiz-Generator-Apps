@@ -22,6 +22,7 @@
           <b-col cols="8 how-to p-2"></b-col>
         </b-row>
       </b-container>
+    <cannot-join v-if="isPlaying" @click.prevent="goback"></cannot-join>
     </div>
 </template>
 
@@ -29,15 +30,17 @@
 // @ is an alias to /src
 import Player from '../components/Player'
 import io from 'socket.io-client'
+import CannotJoin from '../components/CannotJoin'
 export default {
   name: 'Home',
   components: {
-    Player
+    Player,
+    CannotJoin
   },
   data () {
     return {
       players: [],
-      isPlaying: false,
+      isPlaying: true,
       counter: 3,
       showCounter: false,
       socket: {}
