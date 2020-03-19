@@ -50,8 +50,6 @@ export default {
   .players-container {
     border-right: 1px solid rgb(219, 219, 219);
   }
-  .how-to {
-  }
   .lobby{
     height: 100vh;
     border: 1px solid rgb(219, 219, 219);
