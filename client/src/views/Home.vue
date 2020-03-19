@@ -45,7 +45,8 @@ export default {
 
 <style>
   .home{
-    background-color: rgb(245, 243, 243);
+    background-image: url('../assets/Background.jpg');
+    background-size: cover;
   }
   .home-container {
     background-image: url('../assets/bg.jpg');

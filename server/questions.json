@@ -228,7 +228,6 @@
             "c": "it'll be a timeful over there",
             "d": "they'll walked in normally"
         },
-<<<<<<< HEAD:Server/questions.json
         "Answer": "a"
     },
     {
@@ -339,18 +338,6 @@
             "c": "Because it's all right",
             "d": "Because it's counted as skills"
         },
-        "Answer": "a"
+        "Answer": ""
     }
-
-
-
-    
-    
-
-
-    
-=======
-        "answer": ""
-    }
->>>>>>> 569f92c1aee9c29ccfdf6205fd70d36dc2e323fd:server/questions.json
 ]
