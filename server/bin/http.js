@@ -21,6 +21,8 @@ io.on('connection', socket => {
     players.splice(socket.player, 1)
     io.emit('updatePlayer', players)
   })
+})
+  
 
 //nanti dipanggil ke function socket yang get question
 function getQuestion () {
