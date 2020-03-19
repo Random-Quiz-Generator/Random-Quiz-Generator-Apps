@@ -4,7 +4,7 @@
       <h1 class="display-3 mt-5 pt-5">Welcome to</h1>
       <h1 class="display-3 bounce infinite animated">Random Quiz</h1>
       <small>Some are funny. Some are mindblowing.</small>
-      <b-form class="pt-5 mt-4 d-flex flex-column align-items-start">
+      <b-form class="pt-5 mt-4 d-flex flex-column align-items-start" @submit.prevent="joinGame">
         <b-form-group>
           <b-form-input
             v-model= "name"
@@ -13,7 +13,7 @@
             class="form-input"
           ></b-form-input>
       </b-form-group>
-      <b-button type="submit" variant="primary" class="join">Join the fun now</b-button>
+      <b-button variant="primary" class="join" >Join the fun now</b-button>
       </b-form>
     </b-container>
   </div>
@@ -30,6 +30,15 @@ export default {
     return {
       name: ''
     }
+  },
+  methods: {
+    joinGame () {
+      localStorage.setItem('name', this.name)
+      this.$router.push({ path: '/lobby' })
+    }
+  },
+  mounted () {
+    localStorage.clear()
   }
 }
 </script>
