@@ -1,8 +1,9 @@
 <template>
     <div class="room d-flex">
       <b-container class="room-container d-flex flex-column align-items-center shadow">
-        <h1 class="display-3 mt-3">Welcome!</h1>
-        <small>Click start when everyone ready!</small>
+        <h1 class="display-3 mt-3 color-white" v-if="!isPlaying">Welcome!</h1>
+        <h1 class="display-3 mt-3 color-white" v-if="isPlaying">Good luck!</h1>
+        <small class="color-white" v-if="!isPlaying">>Click start when everyone ready!</small>
         <b-row class="lobby m-3">
           <b-col cols="4 players-container p-2 d-flex flex-column">
            <h1 class="display-6 mt-3 player-title">Player joined: </h1>
@@ -14,7 +15,7 @@
           ></player>
            <div class="start-btn mb-4 mr-3 ml-3">
              <div class="d-flex" v-if="showCounter">
-              <small>starting in</small>
+              <small class="color-white">starting in</small>
               <small class="ml-1">{{counter}}</small>
               <small class="ml-1">. . .</small>
              </div>
@@ -23,25 +24,39 @@
             <small class="ml-1" v-if="isPlaying">Game is on progres..</small>
            </div>
           </b-col>
-          <b-col id="question" cols="8 p-2">{{question.question}}</b-col>
+          <b-col cols="8 how-to p-2 d-flex">
+            <quiz-board></quiz-board>
+          </b-col>
         </b-row>
       </b-container>
+    <cannot-join v-if="isPlaying" @click.prevent="goback"></cannot-join>
+    <post-game v-if="isFinished" :result="result"></post-game>
     </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import Player from '../components/Player'
+import io from 'socket.io-client'
+import CannotJoin from '../components/CannotJoin'
+import PostGame from '../components/PostGame'
+import QuizBoard from '../components/QuizBoard'
 export default {
   name: 'Home',
   components: {
-    Player
+    Player,
+    CannotJoin,
+    PostGame,
+    QuizBoard
   },
   data () {
     return {
       counter: 3,
       showCounter: false,
       player: {}
+      socket: {},
+      isFinished: false,
+      result: false // win: true, lose: false
     }
   },
   methods: {
@@ -109,32 +124,35 @@ export default {
 
 <style>
   .room{
-    background-color: rgb(245, 243, 243);
+    background-image: url('../assets/cool-background.png');
+    background-size: cover;
   }
   .room-container {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(45, 59, 26);
     height: 100vh;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
   }
   .players-container {
-    border-right: 1px solid rgb(219, 219, 219);
+    border-right: 1px solid rgb(241, 241, 241);
   }
   .lobby{
     height: 100vh;
-    border: 1px solid rgb(219, 219, 219);
+    border: 1px solid rgb(241, 241, 241);
     width: 100%;
     border-radius: 20px;
   }
   .player-title {
     font-size: 30px;
     font-weight: bold;
+    color: rgb(241, 241, 241);
+
   }
   .start-btn{
     margin-top: auto;
   }
   .start-now{
     width: 100%;
+  }
+  .color-white {
+    color: rgb(241, 241, 241);
   }
 </style>

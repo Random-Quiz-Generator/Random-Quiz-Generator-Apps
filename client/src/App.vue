@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <audio src="./assets/Warped.ogg" loop autoplay preload="auto"/>
     <router-view/>
   </div>
 </template>
@@ -24,5 +25,13 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+small {
+  font-family: 'Bellota Text', cursive;
+}
+
+button {
+  font-family: 'Bellota Text', cursive !important;
 }
 </style>

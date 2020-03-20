@@ -13,7 +13,7 @@
             class="form-input"
           ></b-form-input>
       </b-form-group>
-      <b-button type="submit" variant="primary" class="join" >Join the fun now</b-button>
+      <b-button variant="primary" class="join" type="submit">Join the fun now</b-button>
       </b-form>
     </b-container>
   </div>
@@ -50,7 +50,8 @@ export default {
 
 <style>
   .home{
-    background-color: rgb(245, 243, 243);
+    background-image: url('../assets/Background.jpg');
+    background-size: cover;
   }
   .home-container {
     background-image: url('../assets/bg.jpg');
@@ -66,5 +67,8 @@ export default {
   .join {
     background-color: rgb(8, 77, 25) !important;
     border: 0 !important;
+  }
+  h1{
+    font-family: 'Montserrat', sans-serif;
   }
 </style>
