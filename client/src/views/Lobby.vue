@@ -97,7 +97,7 @@ export default {
           this.$store.commit('SET_QUESTION')
           this.timer = 5
         }
-      }, 1000)
+      }, 8000)
     },
     startGame () {
       this.socket.emit('start')
