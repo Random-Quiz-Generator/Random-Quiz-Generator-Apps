@@ -1,6 +1,6 @@
 <template>
   <div class="quiz-board p-3 flex-grow-1 d-flex flex-column">
-      <h1 class="display-6 board-title pb-3">Find the right answer!</h1>
+      <h1 class="display-6 board-title pb-3 color-white">Find the right answer!</h1>
       <div class="question mt-3 d-flex flex-column align-items-center flex-grow-1">
           <p class="quiz-question">{{ quiz.question }}</p>
           <div class="container answers p-4 d-flex justify-content-center flex-column align-items-center">
@@ -54,7 +54,7 @@ export default {
 }
 .board-title {
   font-size: 16px;
-  border-bottom: 1px solid rgb(37, 37, 37);
+  border-bottom: 1px solid rgb(241, 241, 241);
 }
 .option {
   margin-bottom: 0 !important;
