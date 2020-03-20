@@ -7,7 +7,7 @@
         <b-row class="lobby m-3">
           <b-col cols="4 players-container p-2 d-flex flex-column">
            <h1 class="display-6 mt-3 player-title">Player joined: </h1>
-           <small>Minimum player: 2</small>
+           <small class="color-white">Minimum player: 2</small>
            <player v-for="(player, i) in players"
             :key="i"
             :name="players[i].name"
@@ -37,7 +37,7 @@
 <script>
 import { mapState } from 'vuex'
 import Player from '../components/Player'
-import io from 'socket.io-client'
+// import io from 'socket.io-client'
 import CannotJoin from '../components/CannotJoin'
 import PostGame from '../components/PostGame'
 import QuizBoard from '../components/QuizBoard'
@@ -53,7 +53,7 @@ export default {
     return {
       counter: 3,
       showCounter: false,
-      player: {}
+      player: {},
       socket: {},
       isFinished: false,
       result: false // win: true, lose: false
