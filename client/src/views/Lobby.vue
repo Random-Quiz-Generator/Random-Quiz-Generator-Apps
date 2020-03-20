@@ -56,6 +56,7 @@ export default {
       player: {},
       socket: {},
       isFinished: false,
+      audio: new Audio(require('../assets/Warped.ogg')),
       result: false // win: true, lose: false
     }
   },
@@ -95,6 +96,7 @@ export default {
     }
   },
   created: function () {
+    this.audio.play()
     this.$store.commit('START_CONNECTION')
     const playerName = localStorage.getItem('name')
     this.socket.emit('joined', {
@@ -118,6 +120,8 @@ export default {
   },
   destroyed: function () {
     this.$store.commit('END_CONNECTION')
+    this.audio.pause()
+    this.audio.currentTime = 0
   }
 }
 </script>
