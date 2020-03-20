@@ -12,9 +12,7 @@ let counter = 0
 
 io.on('connection', socket => {
   console.log('konek')
-  socket.on('connect', () => {
-    socket.emit('konek')
-  })
+
   socket.on('joined', (playerName) => {
     console.log('A player joined', playerName)
     socket.player = players.length
@@ -39,6 +37,17 @@ io.on('connection', socket => {
     let question = {}
     if (playing) question = getQuestion() 
     io.emit('getQuestion', question)
+  })
+
+  socket.on('updateScore', players => {
+    io.emit('updatePlayer', players)
+  })
+
+  socket.on('end', () => {
+    if (playing) {
+      playing = false
+    }
+    io.emit('updatePlaying', playing)
   })
   
   socket.on('disconnect', function () {
