@@ -37,7 +37,7 @@
 <script>
 import { mapState } from 'vuex'
 import Player from '../components/Player'
-// import io from 'socket.io-client'
+import io from 'socket.io-client'
 import CannotJoin from '../components/CannotJoin'
 import PostGame from '../components/PostGame'
 import QuizBoard from '../components/QuizBoard'
