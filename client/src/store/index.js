@@ -9,7 +9,9 @@ export default new Vuex.Store({
     socket: null,
     players: [],
     isPlaying: false,
-    question: {}
+    question: {},
+    result: false, // win: true, lose: false
+    isFinished: false
   },
   mutations: {
     START_CONNECTION (state) {
@@ -26,9 +28,16 @@ export default new Vuex.Store({
       state.question = payload
       console.log(state.question, 'question')
     },
+    END_GAME (state, payload) {
+      state.isFinished = true
+      state.socket.emit('end')
+    },
     END_CONNECTION (state) {
       state.socket.emit('leave')
       state.socket = null
+      state.result = false
+      state.isFinished = false
+      state.isPlaying = false
     }
   },
   actions: {

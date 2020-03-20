@@ -19,17 +19,26 @@
               <small class="ml-1">{{counter}}</small>
               <small class="ml-1">. . .</small>
              </div>
+             <div class="d-flex" v-if="showTimer">
+              <small class="color-white">starting in</small>
+              <small class="ml-1">{{timer}}</small>
+              <small class="ml-1">. . .</small>
+             </div>
             <button @click.prevent="startGame" class="btn btn-danger start-now" v-if="showPlayBtn">START</button>
             <button @click.prevent="goback" class="btn btn-warning mt-2 start-now">Back to home</button>
             <small class="ml-1" v-if="isPlaying">Game is on progres..</small>
            </div>
           </b-col>
           <b-col cols="8 how-to p-2 d-flex">
-            <quiz-board></quiz-board>
+            <quiz-board
+              v-if="question.id"
+              :quiz="question"
+              @answer="setAnswer"
+            ></quiz-board>
           </b-col>
         </b-row>
       </b-container>
-    <cannot-join v-if="isPlaying" @click.prevent="goback"></cannot-join>
+    <!-- <cannot-join v-if="isPlaying" @click.prevent="goback"></cannot-join> -->
     <post-game v-if="isFinished" :result="result"></post-game>
     </div>
 </template>
@@ -37,38 +46,56 @@
 <script>
 import { mapState } from 'vuex'
 import Player from '../components/Player'
-import io from 'socket.io-client'
-import CannotJoin from '../components/CannotJoin'
+// import CannotJoin from '../components/CannotJoin'
 import PostGame from '../components/PostGame'
 import QuizBoard from '../components/QuizBoard'
 export default {
   name: 'Home',
   components: {
     Player,
-    CannotJoin,
+    // CannotJoin,
     PostGame,
     QuizBoard
   },
   data () {
     return {
       counter: 3,
+      timer: 3,
       showCounter: false,
+      showTimer: false,
       player: {},
-      socket: {},
+      answer: ''
       isFinished: false,
       audio: new Audio(require('../assets/Warped.ogg')),
-      result: false // win: true, lose: false
     }
   },
   methods: {
-    countdown () {
+    getReady () {
       this.showCounter = true
       const timer = setInterval(() => {
         if (this.counter === 1) {
           clearInterval(timer)
           this.showCounter = false
-          this.isPlaying = true
           this.startGame()
+        } else {
+          this.counter--
+        }
+      }, 1000)
+    },
+    countdown () {
+      this.showTimer = true
+      const timer = setInterval(() => {
+        if (this.counter === 0) {
+          this.socket.emit('fetchQuestion')
+          if (!this.question) {
+            clearInterval(timer)
+            this.showTimer = false
+            this.$store.commit('END_GAME')
+          } else {
+            this.commitAnswer()
+            this.$store.commit('SET_QUESTION')
+            this.timer = 5
+          }
         } else {
           this.counter--
         }
@@ -76,9 +103,21 @@ export default {
     },
     startGame () {
       this.socket.emit('start')
+      this.countdown()
     },
     goback () {
       this.$router.push({ path: '/' })
+    },
+    setAnswer (answer) {
+      this.answer = answer
+    },
+    commitAnswer () {
+      let players = this.players
+      if (this.answer === this.question.answer) {
+        this.player.score += 10
+      }
+      players = players.map(player => player.id === this.player.id ? this.player : player)
+      this.socket.emit('updateScore', players)
     }
   },
   computed: {
@@ -86,7 +125,8 @@ export default {
       'players',
       'socket',
       'isPlaying',
-      'question'
+      'question',
+      'isFinished'
     ]),
     showPlayBtn () {
       let reveal = true
@@ -98,20 +138,21 @@ export default {
   created: function () {
     this.audio.play()
     this.$store.commit('START_CONNECTION')
-    const playerName = localStorage.getItem('name')
-    this.socket.emit('joined', {
-      name: playerName,
+    const player = {
+      id: Math.floor(Math.random() * Math.floor(1000)),
+      name: localStorage.getItem('name'),
       score: 0
-    })
+    }
+    this.player = player
+    this.socket.emit('joined', player)
 
     this.socket.on('updatePlayer', (players) => {
       this.$store.commit('UPDATE_PLAYERS', players)
     })
 
     this.socket.on('updatePlaying', playing => {
-      console.log(this.isPlaying, playing)
       this.$store.commit('SET_PLAYING', playing)
-      console.log(this.isPlaying)
+      console.log(this.isPlaying, playing)
     })
 
     this.socket.on('getQuestion', question => {

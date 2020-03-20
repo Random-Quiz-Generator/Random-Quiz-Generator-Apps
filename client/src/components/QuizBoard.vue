@@ -4,17 +4,14 @@
       <div class="question mt-3 d-flex flex-column align-items-center flex-grow-1">
           <p class="quiz-question">{{ quiz.question }}</p>
           <div class="container answers p-4 d-flex justify-content-center flex-column align-items-center">
-              <b-row>
-                <p class="option-answer shadow-sm pt-4 pb-4">{{ quiz.options.a }}</p>
-              </b-row>
-              <b-row>
-                <p class="option-answer shadow-sm pt-4 pb-4">{{ quiz.options.b }}</p>
-              </b-row>
-              <b-row>
-                <p class="option-answer shadow-sm pt-4 pb-4">{{ quiz.options.c }}</p>
-              </b-row>
-              <b-row>
-                <p class="option-answer shadow-sm pt-4 pb-4">{{ quiz.options.d }}</p>
+              <b-row
+                v-for="(value, key, i) in quiz.options"
+                :key="i"
+                @click="answer(key)"
+              >
+                <p class="option-answer shadow-sm pt-4 pb-4">
+                  {{ value }}
+                </p>
               </b-row>
           </div>
       </div>
@@ -23,19 +20,13 @@
 
 <script>
 export default {
-  data: () => {
-    return {
-      quiz: {
-        id: 10,
-        question: '_ is 1000 times _ _, what is _?',
-        options: {
-          a: 'D',
-          b: 'M',
-          c: 'C',
-          d: 'F'
-        },
-        answer: 'b'
-      }
+  name: 'QuizBoard',
+  props: {
+    quiz: Object
+  },
+  methods: {
+    answer (answer) {
+      this.$emit('answer', answer)
     }
   }
 }
