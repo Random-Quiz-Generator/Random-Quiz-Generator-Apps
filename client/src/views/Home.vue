@@ -13,7 +13,7 @@
             class="form-input"
           ></b-form-input>
       </b-form-group>
-      <b-button variant="primary" class="join" >Join the fun now</b-button>
+      <b-button variant="primary" class="join" type="submit">Join the fun now</b-button>
       </b-form>
     </b-container>
   </div>
