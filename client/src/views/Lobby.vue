@@ -61,6 +61,7 @@ export default {
     return {
       counter: 3,
       timer: 3,
+      questCount: 10,
       showCounter: false,
       showTimer: false,
       player: {},
@@ -87,7 +88,7 @@ export default {
       this.showTimer = true
       const timer = setInterval(() => {
         this.socket.emit('fetchQuestion')
-        if (!this.question) {
+        if (this.questCount === 1) {
           clearInterval(timer)
           this.isFinished = true
           this.showTimer = false
@@ -96,8 +97,9 @@ export default {
           this.commitAnswer()
           this.$store.commit('SET_QUESTION')
           this.timer = 5
+          this.questCount--
         }
-      }, 8000)
+      }, 1000)
     },
     startGame () {
       this.socket.emit('start')
