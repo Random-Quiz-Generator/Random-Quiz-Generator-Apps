@@ -1,8 +1,9 @@
 <template>
     <div class="room d-flex">
       <b-container class="room-container d-flex flex-column align-items-center shadow">
-        <h1 class="display-3 mt-3">Welcome!</h1>
-        <small>Click start when everyone ready!</small>
+        <h1 class="display-3 mt-3" v-if="!isPlaying">Welcome!</h1>
+        <h1 class="display-3 mt-3" v-if="isPlaying">Good luck!</h1>
+        <small v-if="!isPlaying">>Click start when everyone ready!</small>
         <b-row class="lobby m-3">
           <b-col cols="4 players-container p-2 d-flex flex-column">
            <h1 class="display-6 mt-3 player-title">Player joined: </h1>
@@ -19,7 +20,9 @@
             <small class="ml-1" v-if="isPlaying">Game is on progres..</small>
            </div>
           </b-col>
-          <b-col cols="8 how-to p-2"></b-col>
+          <b-col cols="8 how-to p-2 d-flex">
+            <quiz-board></quiz-board>
+          </b-col>
         </b-row>
       </b-container>
     <cannot-join v-if="isPlaying" @click.prevent="goback"></cannot-join>
@@ -33,12 +36,14 @@ import Player from '../components/Player'
 import io from 'socket.io-client'
 import CannotJoin from '../components/CannotJoin'
 import PostGame from '../components/PostGame'
+import QuizBoard from '../components/QuizBoard'
 export default {
   name: 'Home',
   components: {
     Player,
     CannotJoin,
-    PostGame
+    PostGame,
+    QuizBoard
   },
   data () {
     return {
@@ -93,18 +98,16 @@ export default {
     background-color: rgb(245, 243, 243);
   }
   .room-container {
-    background-color: rgb(255, 255, 255);
+    background-image: url('http://hdwpro.com/wp-content/uploads/2016/05/Widescreen-Green-Backgrounds.jpeg');
+    background-size: cover;
     height: 100vh;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
   }
   .players-container {
-    border-right: 1px solid rgb(219, 219, 219);
+    border-right: 1px solid rgb(37, 37, 37);
   }
   .lobby{
     height: 100vh;
-    border: 1px solid rgb(219, 219, 219);
+    border: 1px solid rgb(37, 37, 37);
     width: 100%;
     border-radius: 20px;
   }
