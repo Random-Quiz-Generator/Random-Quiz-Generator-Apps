@@ -15,7 +15,8 @@ export default new Vuex.Store({
   },
   mutations: {
     START_CONNECTION (state) {
-      state.socket = io('http://localhost:3000')
+      // state.socket = io('http://localhost:3000')
+      state.socket = io('https://git.heroku.com/powerful-journey-43830.git')
     },
     UPDATE_PLAYERS (state, payload) {
       console.log(payload, 'ini payload')
