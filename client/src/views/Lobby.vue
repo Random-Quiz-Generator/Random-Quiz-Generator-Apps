@@ -64,9 +64,10 @@ export default {
       showCounter: false,
       showTimer: false,
       player: {},
-      answer: ''
+      answer: '',
       isFinished: false,
       audio: new Audio(require('../assets/Warped.ogg')),
+      result: true
     }
   },
   methods: {
@@ -85,21 +86,18 @@ export default {
     countdown () {
       this.showTimer = true
       const timer = setInterval(() => {
-        if (this.counter === 0) {
-          this.socket.emit('fetchQuestion')
-          if (!this.question) {
-            clearInterval(timer)
-            this.showTimer = false
-            this.$store.commit('END_GAME')
-          } else {
-            this.commitAnswer()
-            this.$store.commit('SET_QUESTION')
-            this.timer = 5
-          }
+        this.socket.emit('fetchQuestion')
+        if (!this.question) {
+          clearInterval(timer)
+          this.isFinished = true
+          this.showTimer = false
+          this.$store.commit('END_GAME')
         } else {
-          this.counter--
+          this.commitAnswer()
+          this.$store.commit('SET_QUESTION')
+          this.timer = 5
         }
-      }, 1000)
+      }, 8000)
     },
     startGame () {
       this.socket.emit('start')

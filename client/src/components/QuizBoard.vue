@@ -2,7 +2,9 @@
   <div class="quiz-board p-3 flex-grow-1 d-flex flex-column">
       <h1 class="display-6 board-title pb-3 color-white">Find the right answer!</h1>
       <div class="question mt-3 d-flex flex-column align-items-center flex-grow-1">
-          <p class="quiz-question">{{ quiz.question }}</p>
+          <div style="height: 20vh;" class="mb-3">
+            <p class="quiz-question">{{ quiz.question }}</p>
+          </div>
           <div class="container answers p-4 d-flex justify-content-center flex-column align-items-center">
               <b-row
                 v-for="(value, key, i) in quiz.options"
@@ -34,7 +36,7 @@ export default {
 
 <style>
 .quiz-question {
-  font-size: 28px !important;
+  font-size: 16px !important;
   background-color: whitesmoke;
   font-family: 'Montserrat', sans-serif;
   font-weight: bolder;
