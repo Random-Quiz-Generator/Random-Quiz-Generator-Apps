@@ -31,6 +31,11 @@ export default {
       name: ''
     }
   },
+  computed: {
+    socket () {
+      return this.$store.state.socket
+    }
+  },
   methods: {
     joinGame () {
       localStorage.setItem('name', this.name)

@@ -7,15 +7,19 @@
         <b-row class="lobby m-3">
           <b-col cols="4 players-container p-2 d-flex flex-column">
            <h1 class="display-6 mt-3 player-title">Player joined: </h1>
-           <small class="color-white">Minimum player: 2</small>
-           <player v-for="(player, i) in players" :key="i" :name="players[i]"></player>
+           <small>Minimum player: 2</small>
+           <player v-for="(player, i) in players"
+            :key="i"
+            :name="players[i].name"
+            :score="players[i].score"
+          ></player>
            <div class="start-btn mb-4 mr-3 ml-3">
              <div class="d-flex" v-if="showCounter">
               <small class="color-white">starting in</small>
               <small class="ml-1">{{counter}}</small>
               <small class="ml-1">. . .</small>
              </div>
-            <button @click.prevent="countdown" class="btn btn-danger start-now" v-if="!isPlaying">START</button>
+            <button @click.prevent="startGame" class="btn btn-danger start-now" v-if="showPlayBtn">START</button>
             <button @click.prevent="goback" class="btn btn-warning mt-2 start-now">Back to home</button>
             <small class="ml-1" v-if="isPlaying">Game is on progres..</small>
            </div>
@@ -31,7 +35,7 @@
 </template>
 
 <script>
-// @ is an alias to /src
+import { mapState } from 'vuex'
 import Player from '../components/Player'
 import io from 'socket.io-client'
 import CannotJoin from '../components/CannotJoin'
@@ -47,10 +51,9 @@ export default {
   },
   data () {
     return {
-      players: [],
-      isPlaying: false,
       counter: 3,
       showCounter: false,
+      player: {}
       socket: {},
       isFinished: false,
       result: false // win: true, lose: false
@@ -71,24 +74,50 @@ export default {
       }, 1000)
     },
     startGame () {
-      console.log('start')
+      this.socket.emit('start')
     },
     goback () {
       this.$router.push({ path: '/' })
     }
   },
+  computed: {
+    ...mapState([
+      'players',
+      'socket',
+      'isPlaying',
+      'question'
+    ]),
+    showPlayBtn () {
+      let reveal = true
+      if (this.players.length >= 2 && !this.isPlaying) reveal = true
+      else reveal = false
+      return reveal
+    }
+  },
   created: function () {
-    this.socket = io('http://localhost:3000')
+    this.$store.commit('START_CONNECTION')
     const playerName = localStorage.getItem('name')
-    this.socket.on('connect', () => {
-      this.socket.emit('joined', playerName)
+    this.socket.emit('joined', {
+      name: playerName,
+      score: 0
     })
-    this.socket.on('updatePlayer', (playerNames) => {
-      this.players = playerNames
+
+    this.socket.on('updatePlayer', (players) => {
+      this.$store.commit('UPDATE_PLAYERS', players)
+    })
+
+    this.socket.on('updatePlaying', playing => {
+      console.log(this.isPlaying, playing)
+      this.$store.commit('SET_PLAYING', playing)
+      console.log(this.isPlaying)
+    })
+
+    this.socket.on('getQuestion', question => {
+      this.$store.commit('SET_QUESTION', question[0])
     })
   },
   destroyed: function () {
-    this.socket.emit('leave')
+    this.$store.commit('END_CONNECTION')
   }
 }
 </script>
