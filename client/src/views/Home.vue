@@ -13,7 +13,7 @@
             class="form-input"
           ></b-form-input>
       </b-form-group>
-      <b-button variant="primary" class="join" >Join the fun now</b-button>
+      <b-button type="submit" variant="primary" class="join" >Join the fun now</b-button>
       </b-form>
     </b-container>
   </div>
@@ -29,6 +29,11 @@ export default {
   data () {
     return {
       name: ''
+    }
+  },
+  computed: {
+    socket () {
+      return this.$store.state.socket
     }
   },
   methods: {
