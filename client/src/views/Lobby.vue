@@ -7,7 +7,7 @@
         <b-row class="lobby m-3">
           <b-col cols="4 players-container p-2 d-flex flex-column">
            <h1 class="display-6 mt-3 player-title">Player joined: </h1>
-           <small>Minimum player: 2</small>
+           <small class="color-white">Minimum player: 2</small>
            <player v-for="(player, i) in players"
             :key="i"
             :name="players[i].name"
@@ -65,6 +65,8 @@ export default {
       showTimer: false,
       player: {},
       answer: ''
+      isFinished: false,
+      audio: new Audio(require('../assets/Warped.ogg')),
     }
   },
   methods: {
@@ -134,6 +136,7 @@ export default {
     }
   },
   created: function () {
+    this.audio.play()
     this.$store.commit('START_CONNECTION')
     const player = {
       id: Math.floor(Math.random() * Math.floor(1000)),
@@ -158,6 +161,8 @@ export default {
   },
   destroyed: function () {
     this.$store.commit('END_CONNECTION')
+    this.audio.pause()
+    this.audio.currentTime = 0
   }
 }
 </script>
